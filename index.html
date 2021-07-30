@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/atoms19/ILUS.CSS/dist/ILUS5.min.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/gh/atoms19/dominity.js/dominityV2.min.js"></script> 
+ <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase.js"></script>
+
+<script  src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/gh/atoms19/ILUS.CSS/dist/ILUS5.min.css" rel="stylesheet">
+<link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.css" rel="stylesheet">
+ <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.js"></script>
+  <title>HTML</title>
+  
+  <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<nav class="nav blue anime-top"> 
+<div class="nav-logo">Pog</div> 
+<div class="nav-menu hide-from-md"style="color:black;" onclick="openMenu()">  
+<input id="usern"disabled value="user">
+<span class="burger-menu"></span>  
+</div> 
+<ul class="hide-till-md">     
+<li>Home</li>  
+<li>Recents</li>     
+<li>Popular</li>    
+<li onclick="openac()">My Account</li> 
+<li onclick="openst()">Settings</li>
+<li onclick="shpog()">Create Inckibato Group</li>
+<li onclick="logout()">Logout</li>
+</ul>
+</nav>
+<div class="sidenav topnav  blue hide-from-md">
+    <ul>    
+<li>Home</li>
+    <li>Recents</li>
+    <li>Popular</li>
+    <li onclick="openac()">My Account</li>
+    <li onclick="openst()">Settings</li>
+    <li onclick="shpog()">Create Group</li>
+    <li onclick="logout()">Logout</li> 
+    
+    </ul></div>
+    <script>    
+    
+    function openMenu(){
+       document.querySelector(".sidenav").classList.toggle("active")
+    document.querySelector(".nav-menu").classList.toggle("active")
+    }
+</script>
+  <div class="full-login">
+  <div class="login-form">
+    <center><input class="inp1"placeholder="Enter Your Name"></center>
+    <center><input class="inp2"placeholder="Enter Your Email"></center>
+   <center><input class="inp3"placeholder="Enter Your Password"></center>
+   <center><button id="btn"onclick="signup()">SignUp</button></center>
+   
+   <h3 id="already"onclick="show_log()">Already Have An Account?</h3>
+  </div>
+  </div>
+  
+   <div class="full-sign">
+     <div class="sign-form">
+       <center><input class="inp11" placeholder="Enter Your Name"></center>
+       <center><input class="inp22" placeholder="Enter Your Email"></center>
+       <center><input class="inp33" placeholder="Enter Your Password"></center>
+       <center><button id="btn2" onclick="signin()">Login</button></center>
+    <h3 id="notal"onclick="sh_u()">Don't Have An Account</h3>
+     </div>
+   </div>
+   
+   <div class="main_plus"onclick="uploadit()">
+     <div class="fa fa-plus"></div>
+   </div>
+   
+  <div class="maincanupload">
+    <button id="upload_btn">Upload</button>
+    <video id='myVid'controls></video>
+    <input id="mycuteinput">
+    <h3 id="waittxt">Please Wait...</h3>
+  </div>
+  <div class="main-profile">
+            <div class="fa fa-chevron-left"id="backicon1"onclick="backac()"></div>
+            <h4 id="txtpro">Profile</h4>
+            <div class="type">
+                <h5 id="usertxtop">Gamer</h5>
+            </div>
+            <img id="pic"src="https://www.vippng.com/png/detail/205-2051554_avatar-profile-png-icon-gamer-avatar-png.png">
+            <div onclick="lagapic()" class="fa fa-camera"id="cam"></div>
+            <input value="gamer" id="nameofgamer"disabled style="color:black;">
+            <h3 id="txtlvl">Level:1</h3>
+              <div class="bar"style="width:80%">    <span class="bar-status" style="width:10%;">        <div class="bar-label">10</div>    </span>  </div>  
+        </div>
+  <div class="main-settings">
+    <div class="fa fa-chevron-left"id="closes"onclick="closst()"></div>
+            <div class="fa fa-moon"id="moonicon"></div>
+           <h3 id="darktxt">Dark Theme</h3>
+           <input class="toggle" oninput="checkit()" type=checkbox victory mini>
+           <img id="pic2"src="https://www.vippng.com/png/detail/205-2051554_avatar-profile-png-icon-gamer-avatar-png.png">
+           <input id="emailofgamer"disabled value="kks@gmail.com">
+           <div class="fa fa-user"id="usericon"></div>
+           <h3 id="actxt">My Account</h3>
+           <div class="fa fa-chevron-right"id="fo1"></div>
+           
+            <div class="fa fa-camera"id="qicon"></div>
+           <h3 id="qtxt">Video Quality</h3>
+           <select id="fo2">
+               <option>240p</option>
+               <option>360p</option>
+               <option>480p</option>
+               <option>720p</option>
+           </select>
+           <div class="fa fa-comment"id="cicon"></div>
+           <h3 id="ftxt">Feedback</h3>
+           <div class="fa fa-chevron-right"id="fo3"></div>
+           
+          <h3 id="viptxt"onclick="sh_vip()">👑 Vip</h3>
+          <div class="fa fa-chevron-right"id="fo4"></div>
+        </div>
+    
+   <div class="pogchat">
+     <button id="pogcreate"onclick="document.querySelector('.fullpogchat').style.display='flex'">Create Or Join</button>
+     
+     <div class="fa fa-times"id="pogcan"onclick="nshpog()"></div>
+   </div>
+   
+   <div class="fullpogchat">
+     <div class="chatprofile">
+       <img id="chatimg">
+       
+     </div>
+     <h3 style="
+     position: absolute;
+     left:25%;
+     top:67%;
+     ">Select Profile Pic</h3>
+     <div class="fa fa-camera"onclick="setchatpic()"style="
+     position: absolute;
+     top:63%;
+     left:37%;
+     font-size:3vh;
+     "></div>
+     <h2 id="poggrouptxt">Create A Group</h2>
+    <div class="fa fa-file-text-o"style="
+    font-size:3vh;
+    top:21%;
+    position:fixed;
+    left:3%;
+    "></div>
+     <input id="nameofgroupinput"placeholder="Enter Your Group Name">
+     <div class="fa fa-unlock-alt"style="
+       font-size:3vh;
+       top:33%;
+       position:fixed;
+       left:3%;
+       -webkit-text-stroke:1.5px black;
+       color:white;
+     "></div>
+     <input id="passofgroupinput"placeholder="Enter Your Group Password">
+     <input id="nameofboi"placeholder="enter your name boi">
+     <button id="pogcreate2"onclick="create2()">Create Or Join</button>
+     </div>
+     
+     <div class="wheretochatarea">
+       <div class="fa fa-chevron-left"style='position: absolute; left:5%; top:1%;'onclick="chatclose()"></div>
+       <textarea id="area51"readonly></textarea>
+       <h2 id="nameofgrouppog">Group</h2>
+       <button onclick="start()"id="startbtn">Start Chatting</button>
+       <div class="inputfooter">
+       <input id="sendmsginput"placeholder="Enter Your Message">
+       <div class="fa fa-paper-plane-o"id="sendicon"onclick="sendmsgpog()"></div>
+       
+       </div>
+
+     </div>
+     <div class="downfooter">
+       <div class="fa fa-compass"></div>
+       <h6 id="extxt">Explore</h6>
+       <div class="fa fa-shopping-cart"></div>
+      <h6 id="shoptxt">Shop</h6>
+       <div class="fa fa-camera"></div>
+       <h6 id="livetxt">Go Live</h6>
+       <div class="fa fa-gamepad"></div>
+       <h6 id="gametxt">Gamezone</h6>
+       <div>👑</div>
+       <h6 id="viptxt">VIP</h6>
+       
+     </div>
+       
+<ul class="scroll-type">
+<div class="ff-can">
+ <img id="ffimg"src="https://www.arabnews.com/sites/default/files/styles/n_670_395/public/2021/04/21/2584226-755536616.jpg?itok=MHAatcMt">
+ <center>Free Fire</center>
+ <button id="ffbtn">Follow</button>
+</div>
+  <div class="mc-can">
+    <img id="mcimg" src="https://venturebeat.com/wp-content/uploads/2016/01/Minecraft.jpg?fit=400%2C225&strip=all">
+    <center>Minecraft</center>
+    <button id="mcbtn">Follow</button>
+  </div>
+  
+  <div class="gta-can">
+    <img id="gtaimg" src="https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png">
+    <center>Gta5</center>
+    <button id="gtabtn">Follow</button>
+  </div>
+   <div class="bgmi-can">
+     <img id="bgmi" src="https://staticg.sportskeeda.com/editor/2021/06/0c449-16239060827699-800.jpg">
+     <center>BGMI</center>
+     <button id="bgmibtn">Follow</button>
+   </div>
+   <div class="addyour">
+     <div class="fa fa-chevron-right"></div>
+   </div>
+</ul>
+
+
+  <ul id="allgames"></ul>
+ <ul id="allusers2"></ul>
+  <script src="main.js"></script>
+</body>
+</html>

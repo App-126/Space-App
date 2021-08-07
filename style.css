@@ -609,7 +609,7 @@ background: whitesmoke;
   background: white;
   top:0px;
   left:0px;
-  z-index: 10002;
+  z-index: 1000002;
   display:none;
 }
 .chatprofile{
@@ -650,6 +650,7 @@ outline: none;
 position: absolute;
 top:32%;
 left:15%;
+text-decoration: none;
 }
 
 #pogcreate2{
@@ -695,7 +696,7 @@ left:15%;
   position: absolute;
   border:1px solid;
   left:0%;
-  top:0%;
+  top:5%;
   overflow: scroll;
   text-align: center;
   font-weight: bold;
@@ -1194,4 +1195,178 @@ width: 100px;
   height:100%;
   border-radius: 100%;
   position: absolute;
+}
+
+.begamercan{
+  width:100%;
+  height:100%;
+  background: white;
+  position:fixed;
+  top:0px;
+  left:0px;
+  z-index: 1000001;
+  
+  
+}
+
+.begamerpiccan{
+  width:100px;
+  height:100px;
+  position: absolute;
+  border-radius: 100px;
+  border:1px solid black;
+  left:37.5%;
+  top:20%;
+}
+
+#begamername{
+  width:170px;
+  height:30px;
+  border:1px solid;
+  outline:none;
+  position: absolute;
+  top:45%;
+  left:30%;
+  border-radius: 3px;
+  font-size:1.7vh;
+  color:black;
+  font-weight: bold;
+}
+
+#begamersum{
+  width:170px;
+  height:30px;
+  border:1px solid;
+  outline:none;
+  position: absolute;
+  top:55%;
+  left:30%;
+  border-radius: 3px;
+  font-size:1.7vh;
+  color:black;
+  font-weight: bold;
+}
+
+::placeholder{
+  font-weight: bold;
+  color: black;
+}
+
+#begamerpic{
+  width:100%;
+  height:100%;
+  position: absolute;
+  border-radius: 100%;
+  left:0px;
+  top:0px;
+}
+
+#begamerbtn{
+  width:50%;
+  height:40px;
+  background: #00A3F7;
+  position: absolute;
+  top:65%;
+  left:26.5%;
+  color:white;
+  border-radius: 5px;
+  outline: none;
+}
+
+#gamerprofile{
+  width:100%;
+  height:100%;
+  position:fixed;
+  top:0%;
+  background-color: white;
+  left:0px;
+  overflow:scroll;
+  z-index: 1000000;
+  display:none;
+}
+.gamercard{
+width:99%;
+background-color:white;
+position:relative;
+top:20%;
+margin:30px;
+left:-7.2%;
+border-radius: 1px;
+height:35vh;
+border:1px solid black;
+}
+
+.gamercardimg{
+  width:100px;
+  height:100px;
+  left:40%;
+  position: absolute;
+  border-radius: 100px;
+  top:10%;
+}
+
+#gamercardname{
+  position: absolute;
+  left:45%;
+  top:55%;
+}
+
+.gamerstars{
+  position: absolute;
+  top:80%;
+  left:50%;
+}
+#usersearch{
+position: absolute;
+width:80%;
+height:35px;
+background-color:#eee;
+border:none;
+top:4%;
+border-radius:5px;
+outline:none;
+font-weight:bold;
+left:12%;
+}
+
+.allgroupscan{
+  width:100%;
+  height:100%;
+  position:fixed;
+  top:0%;
+  background-color: white;
+  left:0px;
+  overflow:scroll;
+  z-index: 1000000;
+  display:none;
+}
+
+.addgroupcan{
+  width:7vh;
+  height: 7vh;
+  border:2px solid;
+  border-radius: 7vh;
+  position: absolute;
+  left:42.5%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size:3vh;
+  top:85%;
+  background-color: #e44;
+  color:white;
+}
+
+.uidtxt{
+  position: absolute;
+  top:90%;
+  left:10%;
+}
+
+.loadpictxt{
+  position: absolute;
+  left:45%;
+  top:25%;
+  font-size:1.3vh;
+  
 }

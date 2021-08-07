@@ -43,8 +43,10 @@ function signup(){
 
 
   
-         alert(user.uid)
-         alert("success")
+         siiimpleToast.message('Your Uid:'+user.uid);
+        var pask=document.getElementById("passofgroupinput").value=user.uid
+         localStorage.setItem("pask",pask)
+         siiimpleToast.message('Login Success');
         var userk =document.getElementById("nameofgamer").innerHTML=name
         localStorage.setItem("userk", userk);
          var usern=document.getElementById("usern").value=name
@@ -89,14 +91,24 @@ window.onload=function(){
   } else {
     document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
   }
+  if (typeof(Storage) !== "undefined") {
+    document.querySelector(".begamercan").style.display = localStorage.sethide2;
+  
+    document.querySelector(".begamercan").style.display = localStorage.sethide2
+  } else {
+    document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+  }
   var usern = localStorage.getItem("usern");
   document.getElementById("usern").value = usern
   var userk = localStorage.getItem("userk");
-  
+   var pask = localStorage.getItem("pask")
+  document.getElementById("passofgroupinput").value=pask
   document.getElementById("nameofgamer").value = userk
   var emailk=localStorage.getItem("emailk")
   
   document.getElementById("emailofgamer").value=emailk
+  
+ 
 }
 
 function signin(e){
@@ -108,7 +120,7 @@ function signin(e){
    const name = document.querySelector(".inp11").value
     firebase.auth().signInWithEmailAndPassword(email, pas).then(success => {  
          
-         alert(firebase.auth().currentUser)
+         
           firebase.database().ref("users").push().set({
             "name": name
             
@@ -120,12 +132,18 @@ function signin(e){
          localStorage.setItem("userk", userk);
          localStorage.setItem("usern", usern);
     localStorage.setItem("emailk",emailk)
+  var uid;
+  siiimpleToast.message('Your UID:'+firebase.auth().currentUser.uid);
+    
+   var pask=document.getElementById(" passofgroupinput").value=firebase.auth().currentUser.uid
+   localStorage.setItem("pask",pask)
+    siiimpleToast.message('Login Success');
     }).catch((error) => { 
          var errorCode = error.code; 
          var errorMessage = error.message; 
-         alert(errorMessage)
+         siiimpleToast.message(error.message);
     })
-    alert("Please Wait Our AI Is Finding Account")
+    siiimpleToast.message('Please Wait We Are Finding Your Account');
     if (typeof(Storage) !== "undefined") {
       if (localStorage.sethide) {
     
@@ -155,6 +173,7 @@ function logout(){
     }
     document.querySelector(".full-login").style.display = localStorage.sethide;
   }
+  document.querySelector(".begamercan").style.display="flex"
 }
 
 
@@ -205,9 +224,9 @@ firebase.database().ref("games").on("child_added", function(snapshot) {
 
         
         <h5 id="bruho">${snapshot.val().name}</h5>
- <video src=${snapshot.val().image || ""} id="card-img" style='display:' + snapshot.val().image ? "block" : "none"}/>
+ <video class="card-img" data-id='" + snapshot.key + "' onclick="plv()">
              
-                 <source src=${snapshot.val().sr}>
+                 
                
                  </video>
 
@@ -220,6 +239,10 @@ firebase.database().ref("games").on("child_added", function(snapshot) {
 
 
 })
+function plv(){
+         var messageId = self.getAttribute("data-id");
+        
+}
 
 function openac(){
   document.querySelector('.main-profile').style.display="flex"
@@ -241,7 +264,7 @@ function lagapic(){
       reader.onload=function (){
       document.getElementById("pic").src=reader.result
       
-      alert(reader.result)
+      
       }
       reader.readAsDataURL(files[0])
   }
@@ -298,8 +321,9 @@ function checkit(){
 }
 
 function shpog(){
-  document.querySelector(".pogchat").style.display="flex"
-  alert("So This Chat Feature Is Special For All Pog Gamers in this you can create or join any chat room by password and nobody can read your chat instead of you if you will close app your chat will clear by entering password again you can again send messages.you can send awesome stickers by buying vip for just $5 And Chatting Is Free😍.")
+  document.querySelector(".allgroupscan").style.display="block"
+  
+   siiimpleToast.message("So This Chat Feature Is Special For All Pog Gamers in this you can create or join any chat room by password and nobody can read your chat instead of you if you will close app your chat will clear by entering password again you can again send messages.you can send awesome stickers by buying vip for just $5 And Chatting Is Free😍.")
   document.querySelector(".sidenav").classList.toggle("active")
   document.querySelector(".nav-menu").classList.toggle("active")
 }
@@ -312,7 +336,16 @@ function create2(){
   var pogpass=document.getElementById("passofgroupinput").value
   var pogmsg="Group Created"
   var pogname=document.getElementById("nameofboi").value
-  
+  var list=document.querySelector(".allgroupscan")
+  var groupname=document.getElementById("nameofgroupinput")
+  list.insertAdjacentHTML(`afterbegin`, `<li>
+      
+                  <i class="fas fa-trash-alt deleteTask"></i>
+                  
+                  <h4>${groupname.value}</h4>
+                  
+              </li>`);
+              
   var db=firebase.database()
   
   db.ref("meada/"+pogpass+"/").push({
@@ -329,7 +362,7 @@ function create2(){
 });
 document.querySelector('.fullpogchat').style.display='none'
 document.querySelector(".pogchat").style.display="none"
-alert("Group Is Created Gamers Now Chat All Night")
+siiimpleToast.message('Group Is Created Gamers');
 
 document.querySelector(".wheretochatarea").style.display="flex"
 
@@ -340,7 +373,7 @@ function sendmsgpog(){
   var usernamepog=document.getElementById("nameofboi").value
   var whatmess=document.getElementById("sendmsginput").value
   var pogpass2=document.getElementById("passofgroupinput").value
-  
+  var music=new Audio("https://www.dropbox.com/s/a31ukbni41lvpsn/insight-578.mp3?dl=1")
   var db=firebase.database()
   
   var msg="\n\n"+usernamepog+":"+whatmess+"\n"
@@ -359,6 +392,7 @@ function sendmsgpog(){
   });
   
   document.getElementById("sendmsginput").value=""
+  music.play()
 }
 
 function start(){
@@ -371,7 +405,8 @@ function start(){
 
         var frommsg=snapshot.val().message
         
-         document.getElementById("area51").append(frommsg+"\n")
+         document.getElementById("area51").append("\n"+frommsg+"\n")
+
          
          })
 
@@ -532,3 +567,134 @@ var random=Math.floor(Math.random()*20)
  
 
 
+function begamerpro(){
+  var input = document.createElement("input")
+  input.type = "file"
+  
+  input.onchange = e => {
+    files = e.target.files;
+    reader = new FileReader()
+    reader.onload = function() {
+      document.getElementById("begamerpic").src = reader.result
+  var pico=document.getElementById("lol").value=reader.result
+  
+    }
+    reader.readAsDataURL(files[0])
+  }
+  
+  
+  input.click()
+}
+
+function creategamer(){
+  var gamername=document.getElementById("begamername").value
+  var gamerbio=document.getElementById("begamersum").value
+  var pico=document.getElementById("lol").value
+  var uid=document.getElementById("passofgroupinput").value
+  if( document.getElementById("begamername").value.length<=3||
+    document.getElementById("begamersum").value.length<=3||
+    document.getElementById("lol").value.length<=3){
+      siiimpleToast.message('Please Enter Your Name And Bio');
+    }else{
+  firebase.database().ref("gamerprofile").push().set({
+    "gamername":gamername,
+    "gamerbio":gamerbio,
+    "pico":pico,
+    "uid":uid,
+    "stars":0
+  })
+  siiimpleToast.message('Success✓');
+  if (typeof(Storage) !== "undefined") {
+    if (localStorage.sethide2) {
+  
+      if (localStorage.sethide2 === "none")
+        localStorage.sethide2 = "flex";
+      else
+        localStorage.sethide2 = "none";
+    } else {
+      localStorage.sethide2 = "none";
+    }
+    document.querySelector(".begamercan").style.display = localStorage.sethide2;
+  
+  }
+  
+    }
+  
+}
+
+firebase.database().ref("gamerprofile").on("child_added", function(snapshot) {
+
+
+  var html = `
+            <div class="gamercard">
+
+        
+        <h5 id="gamercardname">${snapshot.val().gamername}</h5>
+ <img class="gamercardimg" id={snapshot.key} >
+            <button class="btn"id="like"onclick="bestar(this)">Be Star</button> 
+            <p id=${snapshot.key} class="gamerstars">${snapshot.val().stars} Stars</p>
+            <button class="btn"onclick="message(this)"style="position: absolute;top:30%;left:0%;">Message</button>            
+               
+                 <p id=${snapshot.key} class="uidtxt">Uid:${snapshot.val().uid}</p>
+<p id=${snapshot.key} class="picotxt"style="display:none;">${snapshot.val().pico}</p>
+        <p class="loadpictxt" id=${snapshot.key} onclick="loadimg(this)">Load Profile Pic</p>
+        </div>
+        `
+
+  var gamerprofile = document.getElementById("gamerprofile")
+  gamerprofile.innerHTML = html + gamerprofile.innerHTML;
+
+
+
+})
+var stared=true;
+function bestar(self){
+ if(stared){
+  var starsCount = self.parentElement.querySelector('.gamerstars');
+  starsCount.innerHTML = parseInt(starsCount.innerHTML) + 1
+  var starsId = starsCount.id
+  
+  firebase.database().ref('gamerprofile/' + `${starsId}`).update({
+    "stars": parseInt(starsCount.innerHTML)
+  })
+  like.innerTEXT="UNSTAR"
+ }
+ else{
+   var starsCount = self.parentElement.querySelector('.gamerstars');
+   starsCount.innerHTML = parseInt(starsCount.innerHTML) - 1
+   var starsId = starsCount.id
+   like.innerTEXT="UNSTAR"
+   firebase.database().ref('gamerprofile/' + `${starsId}`).update({
+     "stars": parseInt(starsCount.innerHTML)
+   })
+   
+ }
+ stared=!stared
+  }
+
+
+function sruser(){
+  
+}
+
+function message(self){
+  var selfUid = self.parentElement.querySelector('.uidtxt').innerHTML
+  alert(selfUid)
+  document.querySelector(".wheretochatarea").style.display="flex"
+  document.querySelector("#gamerprofile"). style.display="none"
+  passofgroupinput.value=selfUid
+  nameofgroupinput.value="fan"
+  
+}
+
+function loadimg(self){
+  var selfImg=self.parentElement.querySelector('.gamercardimg')
+  
+   var selfPico = self.parentElement.querySelector('.picotxt').innerHTML
+   
+   var selfTxt = self.parentElement.querySelector('.loadpictxt')
+  
+   selfImg.src=selfPico
+   
+   selfTxt.style.display="none"
+}

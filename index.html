@@ -170,7 +170,7 @@
        -webkit-text-stroke:1.5px black;
        color:white;
      "></div>
-     <input id="passofgroupinput"placeholder="Enter Your Group Password"disabled>
+     <input id="passofgroupinput"placeholder="Enter Your Group Password">
      <input id="nameofboi"placeholder="enter your name boi">
      <button id="pogcreate2"onclick="create2()">Create</button>
      </div>
@@ -227,23 +227,20 @@
      <div class="fa fa-chevron-right"></div>
    </div>
 </ul>
-<ul class="allgroupscan">
+<div class="allgroupscan">
   
   <div class="addgroupcan"onclick="document.querySelector('.fullpogchat').style.display='flex'">
     <div class="fa fa-plus"></div>
   </div>
   
-  <center><h3 style="
-  position:relative;
-  top:50vh;
-  ">No Group Found</h3></center>
+  <ul id="listgroups"></ul>
   
     <div class="fa fa-chevron-left" style="
     font-size:3vh;
     position: absolute;
     left:3%;
     top:5%;" onclick="document.querySelector('.allgroupscan').style.display='none'"></div>
-</ul>
+</div>
 <div class="begamercan">
   <center>Create Your Gamer Profile</center>
   <div class="begamerpiccan">

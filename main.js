@@ -224,7 +224,9 @@ firebase.database().ref("games").on("child_added", function(snapshot) {
 
         
         <h5 id="bruho">${snapshot.val().name}</h5>
- <video class="card-img" data-id='" + snapshot.key + "' onclick="plv()">
+        <p id=${snapshot.key} class="ov">${snapshot.val().sr} Stars</p>
+        
+ <video class="card-img" controls id=${snapshot.key} onclick="plv(this)">
              
                  
                
@@ -240,7 +242,8 @@ firebase.database().ref("games").on("child_added", function(snapshot) {
 
 })
 function plv(){
-         var messageId = self.getAttribute("data-id");
+        var srcId=self.parentElement.querySelector(".ov").innerHTML
+         var messageId = self.parentElement.querySelector(".card-img").src=srcId
         
 }
 
@@ -338,14 +341,12 @@ function create2(){
   var pogname=document.getElementById("nameofboi").value
   var list=document.querySelector(".allgroupscan")
   var groupname=document.getElementById("nameofgroupinput")
-  list.insertAdjacentHTML(`afterbegin`, `<li>
-      
-                  <i class="fas fa-trash-alt deleteTask"></i>
-                  
-                  <h4>${groupname.value}</h4>
-                  
-              </li>`);
-              
+  start()
+  
+  var kuch=document.getElementById("listgroups")
+  
+  kuch.innerHTML += '<li>' + groupname.value + '</li>';
+         store()
   var db=firebase.database()
   
   db.ref("meada/"+pogpass+"/").push({
@@ -361,14 +362,31 @@ function create2(){
     
 });
 document.querySelector('.fullpogchat').style.display='none'
-document.querySelector(".pogchat").style.display="none"
+
 siiimpleToast.message('Group Is Created Gamers');
 
 document.querySelector(".wheretochatarea").style.display="flex"
+document.querySelector(".allgroupscan").style.display="none"
 
 nameofgrouppog.innerHTML=document.getElementById("nameofgroupinput").value
 }
-
+function store(){
+ var kuch=document.getElementById("listgroups")
+ 
+  window.localStorage.myitems = kuch.innerHTML;
+  getValues()
+}
+function getValues() {
+ var kuch=document.getElementById("listgroups")
+ 
+  var storedValues = window.localStorage.myitems;
+  if (!storedValues) {
+    kuch.innerHTML = '<li>Group</li>'
+  }
+  else {
+    kuch.innerHTML = storedValues;
+  }
+}
 function sendmsgpog(){
   var usernamepog=document.getElementById("nameofboi").value
   var whatmess=document.getElementById("sendmsginput").value
@@ -414,6 +432,8 @@ function start(){
 
 function chatclose(){
   document.querySelector(".wheretochatarea").style.display="none"
+  area51.value=""
+  document.getElementById("startbtn").style.display="flex"
 }
 
 function sh_u(){
@@ -629,16 +649,32 @@ firebase.database().ref("gamerprofile").on("child_added", function(snapshot) {
             <div class="gamercard">
 
         
-        <h5 id="gamercardname">${snapshot.val().gamername}</h5>
- <img class="gamercardimg" id={snapshot.key} >
-            <button class="btn"id="like"onclick="bestar(this)">Be Star</button> 
-            <p id=${snapshot.key} class="gamerstars">${snapshot.val().stars} Stars</p>
-            <button class="btn"onclick="message(this)"style="position: absolute;top:30%;left:0%;">Message</button>            
+        <h5 class="gamercardname" id=${snapshot.key}>${snapshot.val().gamername}</h5>
+ <img class="gamercardimg" id={snapshot.key} onclick="openpro(this)">
+            
+            
+                     
                
-                 <p id=${snapshot.key} class="uidtxt">Uid:${snapshot.val().uid}</p>
+                 <p id=${snapshot.key} class="uidtxt"style="display:none;">Uid:${snapshot.val().uid}</p>
 <p id=${snapshot.key} class="picotxt"style="display:none;">${snapshot.val().pico}</p>
         <p class="loadpictxt" id=${snapshot.key} onclick="loadimg(this)">Load Profile Pic</p>
+        <p id=${snapshot.key} class="biotxt" style="display:none;">${snapshot.val().gamerbio}</p>
         </div>
+        <div class="fulluserpro">
+        <div class="fa fa-chevron-left"onclick="document.querySelector('.fulluserpro').style.display='none'"></div>
+               <center><img id=${snapshot.key} class="userpropic" src=""></center>
+               <center> <h3 class="userproname">${snapshot.val().gamername}</h3></center>
+                
+                <button class="starbtn"onclick="bestar(this)">Be Star</button>
+                <button onclick="message(this)" class="messagebtn">Messge In Fan Group</button>
+                               <h3 id=${snapshot.key} class="uidtxt2">${snapshot.val().uid}</h3>
+                               
+               <center><p id=${snapshot.key} class="userprosum">${snapshot.val().gamerbio}</p></center>
+               <center><h5 class="userprostar"id=${snapshot.key}>${snapshot.val().stars}</h5></center>
+               <input id="proftxt">
+               
+
+                </div>
         `
 
   var gamerprofile = document.getElementById("gamerprofile")
@@ -650,8 +686,12 @@ firebase.database().ref("gamerprofile").on("child_added", function(snapshot) {
 var stared=true;
 function bestar(self){
  if(stared){
-  var starsCount = self.parentElement.querySelector('.gamerstars');
+  var starsCount = self.parentElement.querySelector('.userprostar');
+  
+  var like=document.querySelector(".messagebtn")
+  like.innerTEXT="UNSTAR"
   starsCount.innerHTML = parseInt(starsCount.innerHTML) + 1
+  
   var starsId = starsCount.id
   
   firebase.database().ref('gamerprofile/' + `${starsId}`).update({
@@ -660,8 +700,10 @@ function bestar(self){
   like.innerTEXT="UNSTAR"
  }
  else{
-   var starsCount = self.parentElement.querySelector('.gamerstars');
+   var starsCount = self.parentElement.querySelector('.userprostar');
+   
    starsCount.innerHTML = parseInt(starsCount.innerHTML) - 1
+   
    var starsId = starsCount.id
    like.innerTEXT="UNSTAR"
    firebase.database().ref('gamerprofile/' + `${starsId}`).update({
@@ -678,13 +720,13 @@ function sruser(){
 }
 
 function message(self){
-  var selfUid = self.parentElement.querySelector('.uidtxt').innerHTML
+  var selfUid = self.parentElement.querySelector('.uidtxt2').innerHTML
   alert(selfUid)
   document.querySelector(".wheretochatarea").style.display="flex"
   document.querySelector("#gamerprofile"). style.display="none"
   passofgroupinput.value=selfUid
   nameofgroupinput.value="fan"
-  
+  start()
 }
 
 function loadimg(self){
@@ -697,4 +739,27 @@ function loadimg(self){
    selfImg.src=selfPico
    
    selfTxt.style.display="none"
+}
+
+function openpro(self){
+  var selfImg2 =document.querySelector('.userpropic')
+  
+  var selfPico2 = self.parentElement.querySelector('.picotxt').innerHTML
+  
+  
+  
+  var selfName = self.parentElement.querySelector('.gamercardname').innerHTML
+  
+  document.querySelector(".userproname").innerHTML = selfName
+  
+  var selfBio=self.parentElement.querySelector(".biotxt").innerHTML
+  
+  document.querySelector(".userprosum").innerHTML=selfBio
+  var picSr=document.getElementById("proftxt").value
+  
+  picSr.value=selfPico2.innerHTML
+  
+  selfImg2.src=selfPico2
+  alert(picSr.value)
+  document.querySelector(".fulluserpro").style.display="block"
 }

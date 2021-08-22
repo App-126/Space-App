@@ -35,6 +35,7 @@
 <div class="nav-logo">Pog</div> 
 <div class="nav-menu hide-from-md"style="color:black;" onclick="openMenu()">  
 <input id="usern"disabled value="user">
+
 <span class="burger-menu"></span>  
 </div> 
 <ul class="hide-till-md">     
@@ -45,7 +46,7 @@
 <li onclick="openst()">Settings</li>
 <li onclick="shpog()">Your Groups</li>
 <li onclick="logout()">Logout</li>
-
+<li>Logout Profile</li>
 </ul>
 </nav>
 <div class="sidenav topnav  blue hide-from-md">
@@ -57,7 +58,7 @@
     <li onclick="openst()">Settings</li>
     <li onclick="shpog()">Your Groups</li>
     <li onclick="logout()">Logout</li> 
-    
+    <li>Logout Profile</li>
     </ul></div>
     <script>    
     
@@ -66,6 +67,7 @@
     document.querySelector(".nav-menu").classList.toggle("active")
     }
 </script>
+<button id="a1"onclick="a2()">Logout Profile</button>
   <div class="full-login">
   <div class="login-form">
     <center><input class="inp1"placeholder="Enter Your Name"></center>
@@ -93,7 +95,7 @@
    
   <div class="maincanupload">
     <button id="upload_btn">Upload</button>
-    <video id='myVid'controls></video>
+    
     <input id="mycuteinput">
     <h3 id="waittxt">Please Wait...</h3>
   </div>
@@ -146,11 +148,11 @@
      <h3 style="
      position: absolute;
      left:25%;
-     top:67%;
+     top:95%;
      ">Select Profile Pic</h3>
      <div class="fa fa-camera"onclick="setchatpic()"style="
      position: absolute;
-     top:63%;
+     top:92%;
      left:37%;
      font-size:3vh;
      "></div>
@@ -171,13 +173,15 @@
        color:white;
      "></div>
      <input id="passofgroupinput"placeholder="Enter Your Group Password">
-     <input id="nameofboi"placeholder="enter your name boi">
+     <input id="nameofboi"placeholder="enter your name ">
+     <textarea id="rulesofgroup" placeholder="enter your group rules"></textarea>
      <button id="pogcreate2"onclick="create2()">Create</button>
      </div>
      
      <div class="wheretochatarea">
-       <div class="fa fa-chevron-left"style='position: absolute; left:5%; top:1%;'onclick="chatclose()"></div>
-       <textarea id="area51"readonly></textarea>
+       <div class="fa fa-chevron-left"style='position: absolute; left:5%; top:1%; color:white;'onclick="chatclose()"></div>
+              <div class="fa fa-bars"style='position: absolute; left:85%; top:1%; color:white;'onclick="opset()"></div>
+       <ul id="area51"></ul>
        <h2 id="nameofgrouppog">Group</h2>
        <button onclick="start()"id="startbtn">Start Chatting</button>
        <div class="inputfooter">
@@ -185,7 +189,14 @@
        <div class="fa fa-paper-plane-o"id="sendicon"onclick="sendmsgpog()"></div>
        
        </div>
-
+<div class="pognav">
+  <center><h2>Group</h2></center>
+  <div class="fa fa-chevron-left"style="position: absolute;left:2%;top:2%;"onclick="document.querySelector('.pognav').style.display='none'"></div>
+  <center><button id="inbtn">Invite Members</button></center>
+  <center><h5 id="chattag"># Chat</h5></center>
+  <center><h5 id="rulestag"onclick="tellrule()"># Rules</h5></center>
+  
+</div>
      </div>
      <div class="downfooter">
        <div class="fa fa-compass"onclick="document.getElementById('gamerprofile').style.display='block'"></div>

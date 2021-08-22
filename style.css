@@ -14,12 +14,26 @@ body {
   font-weight: bold;
   font-size: 5vh;
   z-index: 10000;
+  overflow: scroll;
 }
 
 ul{
   font-weight: bold;
+  overflow: scroll;
 }
-
+#a1{
+  width:130px;
+  height: 30px;
+  position: absolute;
+  outline: none;
+  left:10%;
+  border:1px solid;
+  border-radius: 5px;
+  color: black;
+  top: 15%;
+  z-index:100000;
+  display: none;
+}
 .full-login{
   width:100%;
   height:100%;
@@ -619,7 +633,18 @@ background: whitesmoke;
   border:1px solid;
   position: absolute;
   left:30%;
-  top:50%;
+  top:80%;
+}
+#rulesofgroup{
+  width: 70%;
+  height:18vh;
+  outline:none;
+  border:1px solid;
+  position: absolute;
+  top:57%;
+  left:14%;
+
+  
 }
 #poggrouptxt{
   font-size: 3vh;
@@ -682,13 +707,43 @@ left:15%;
   width: 100%;
   height: 100%;
   position:fixed;
-  background: white;
+  background: #e2252b;
   top:0px;
   left:0px;
   z-index: 10003;
   display:none;
+  
+}
+.pognav{
+  width:60%;
+  height: 100%;
+  position: fixed;
+  top:0px;
+  left:0px;
+  background: white;
+  box-shadow: 0 0 4px black;
+  display: none;
 }
 
+#inbtn{
+  width:60%;
+  height: 6vh;
+  outline: none;
+  background: #0064FF;
+  border:1px solid;
+  color:white;
+  position: relative;
+  top:8vh;
+  border-radius: 5px;
+}
+#chattag{
+  position:relative;
+  top:22vh;
+}
+#rulestag{
+  position:relative;
+  top:25vh;
+}
 #area51{
   width:100%;
   height: 90%;
@@ -700,6 +755,7 @@ left:15%;
   overflow: scroll;
   text-align: center;
   font-weight: bold;
+  background: white;
 }
 
 #sendmsginput{
@@ -734,9 +790,11 @@ left:15%;
 
 #nameofgrouppog{
   position:absolute;
-  left:40%;
+  left:50%;
   font-size: 3vh;
-  top:5%;
+  top:1%;
+  font-size: 1.5vh;
+  color: white;
 }
 
 
@@ -940,8 +998,9 @@ left:15%;
 
 #fftxt{
   position: absolute;
-  top:80%;
+  top:85%;
   left:20%;
+  font-size: 2vh;
 }
 
 #ffbtn{
@@ -953,7 +1012,7 @@ left:15%;
   border-radius: 5px;
   background: #20BCFF;
   left:15%;
-  top:50%;
+  top:55%;
   color: white;
 }
 
@@ -966,7 +1025,7 @@ width: 100px;
   border-radius: 5px;
   background: #20BCFF;
   left:15%;
-  top:50%;
+  top:55%;
   color: white;
 }
 
@@ -979,7 +1038,7 @@ width: 100px;
   border-radius: 5px;
   background: #20BCFF;
   left: 15%;
-  top: 50%;
+  top: 55%;
   color: white;
 }
 
@@ -992,7 +1051,7 @@ width: 100px;
   border-radius: 5px;
   background: #20BCFF;
   left: 15%;
-  top: 50%;
+  top: 55%;
   color: white;
 }
 .ff-can{
@@ -1000,8 +1059,11 @@ width: 100px;
   height:80%;
   position: absolute;
   left:10%;
-  border:1px solid;
+  box-shadow:0 0 2px black;
   top:0%;
+  
+  border-radius: 8px;
+  
 }
 
 #ffimg{
@@ -1366,7 +1428,7 @@ left:12%;
 
 .loadpictxt{
   position: absolute;
-  left:45%;
+  left:75%;
   top:25%;
   font-size:1.3vh;
   
@@ -1451,4 +1513,50 @@ left:12%;
   position: absolute;
   top:70%;
   left:20%;
+}
+
+.messcard{
+  width: auto;
+  height: auto;
+  background: white;
+  box-shadow: 0 0 3px black;
+  position:relative;
+  margin: 10px;
+  left:0vh;
+  top:5vh;
+  border-radius: 7px;
+  overflow: scroll;
+}
+
+#poguser{
+  position: relative;
+  top:1vh;
+  left:5vh;
+}
+
+#pogmess{
+  position: relative;
+  left:5vh;
+  top:1vh;
+}
+
+#messimg{
+  width:30px;
+  height: 30px;
+  position: relative;
+  left:1vh;
+  top:-2vh;
+  border-radius: 30px;
+  border:0px solid;
+}
+
+#noti{
+  width:100%;
+  height: 100%;
+  background: white;
+  position:fixed;
+  top:0px;
+  left:0px;
+  z-index: 10000;
+  display:none;
 }

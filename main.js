@@ -176,7 +176,20 @@ function logout(){
   document.querySelector(".begamercan").style.display="flex"
 }
 
-
+function a2(){
+  if (typeof(Storage) !== "undefined") {
+    if (localStorage.sethide2) {
+  
+      if (localStorage.sethide2 === "flex")
+        localStorage.sethide2 = "none";
+      else
+        localStorage.sethide2 = "flex";
+    } else {
+      localStorage.sethide2 = "flex";
+    }
+    document.querySelector(".begamercan").style.display = localStorage.sethide;
+  }
+}
 function show_log(){
   document.querySelector(".full-login").style.display = "none"
   document.querySelector(".full-sign").style.display ="flex"
@@ -190,7 +203,7 @@ function uploadit(){
     files = e.target.files;
     reader = new FileReader()
     reader.onload = function() {
-      document.getElementById("myVid").src = reader.result;
+      
       document.querySelector(".maincanupload").style.display="flex"
       document.getElementById("mycuteinput").value=reader.result
       waittxt.innerHTML="DONE"
@@ -225,13 +238,9 @@ firebase.database().ref("games").on("child_added", function(snapshot) {
         
         <h5 id="bruho">${snapshot.val().name}</h5>
         <p id=${snapshot.key} class="ov">${snapshot.val().sr} Stars</p>
-        
- <video class="card-img" controls id=${snapshot.key} onclick="plv(this)">
-             
-                 
-               
-                 </video>
-
+        <div class="fa fa-camera"style="position:absolute;left:50%;top:90%;"onclick="plv(this)"></div>
+ 
+<video controls alt='No Image' class="card-img" style='display:' + snapshot.val().sr ? "block" : "none"}/>
         </div>
         `
 
@@ -241,10 +250,14 @@ firebase.database().ref("games").on("child_added", function(snapshot) {
 
 
 })
-function plv(){
+function plv(self){
         var srcId=self.parentElement.querySelector(".ov").innerHTML
-         var messageId = self.parentElement.querySelector(".card-img").src=srcId
         
+        
+         var messageId = self.parentElement.querySelector(".card-img").src=srcId
+         
+         messageId.play()
+        alert(srcId)
 }
 
 function openac(){
@@ -337,8 +350,9 @@ function nshpog(){
 
 function create2(){
   var pogpass=document.getElementById("passofgroupinput").value
-  var pogmsg="Group Created"
+  var pogmsg="Group Created By"+pogname
   var pogname=document.getElementById("nameofboi").value
+  var pogrules=document.getElementById("rulesofgroup").value
   var list=document.querySelector(".allgroupscan")
   var groupname=document.getElementById("nameofgroupinput")
   start()
@@ -358,9 +372,11 @@ function create2(){
     message:pogmsg,
     
     
+    
       
     
 });
+
 document.querySelector('.fullpogchat').style.display='none'
 
 siiimpleToast.message('Group Is Created Gamers');
@@ -369,6 +385,10 @@ document.querySelector(".wheretochatarea").style.display="flex"
 document.querySelector(".allgroupscan").style.display="none"
 
 nameofgrouppog.innerHTML=document.getElementById("nameofgroupinput").value
+}
+function tellrule(){
+  var pogrules=document.getElementById("rulesofgroup").value
+  alert("rules:"+pogrules)
 }
 function store(){
  var kuch=document.getElementById("listgroups")
@@ -391,43 +411,48 @@ function sendmsgpog(){
   var usernamepog=document.getElementById("nameofboi").value
   var whatmess=document.getElementById("sendmsginput").value
   var pogpass2=document.getElementById("passofgroupinput").value
+  var userimg=chatimg.src
   var music=new Audio("https://www.dropbox.com/s/a31ukbni41lvpsn/insight-578.mp3?dl=1")
-  var db=firebase.database()
   
-  var msg="\n\n"+usernamepog+":"+whatmess+"\n"
- 
-  db.ref("meda/" + pogpass2 + "/").push({
-  
-  
-  
-  
-    name: usernamepog,
-    message: msg,
-    
-  
-  
-  
-  });
+  if(document.getElementById("sendmsginput").value==""){
+    alert("Please Enter Any Message")
+  }else{
+  firebase.database().ref("meda"+pogpass2).push().set({
+    "usernamepog": usernamepog,
+    "whatmess":whatmess,
+    "poggpass2":pogpass2,
+    "userimg":userimg
+  })
   
   document.getElementById("sendmsginput").value=""
   music.play()
+  }
 }
 
 function start(){
   var pogpass2=document.getElementById("passofgroupinput").value
   document.getElementById("startbtn").style.display="none"
   
-  var db=firebase.database()
+  firebase.database().ref("meda"+pogpass2).on("child_added", function(snapshot) {
   
-  db.ref("meda/"+pogpass2+"/").on('child_added',function(snapshot){
-
-        var frommsg=snapshot.val().message
-        
-         document.getElementById("area51").append("\n"+frommsg+"\n")
-
+  
+    var html = `
+              <div class="messcard">
+  
          
-         })
 
+<h4 id="pogmess">${snapshot.val().whatmess}</h4>
+ <img src=${snapshot.val().userimg} id="messimg">
+          </div>
+          
+          `
+  
+    var area51 = document.getElementById("area51")
+    area51.innerHTML = html + area51.innerHTML;
+  
+  
+  
+  })
 }
 
 function chatclose(){
@@ -595,7 +620,7 @@ function begamerpro(){
     files = e.target.files;
     reader = new FileReader()
     reader.onload = function() {
-      document.getElementById("begamerpic").src = reader.result
+      
   var pico=document.getElementById("lol").value=reader.result
   
     }
@@ -762,4 +787,8 @@ function openpro(self){
   selfImg2.src=selfPico2
   alert(picSr.value)
   document.querySelector(".fulluserpro").style.display="block"
+}
+
+function opset(){
+  document.querySelector(".pognav").style.display="block"
 }
